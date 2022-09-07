@@ -1,7 +1,7 @@
-import { animation } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { interval } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from "rxjs";
+
 @Component({
   selector: 'app-slider',
   templateUrl: './slider.component.html',
@@ -9,26 +9,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class SliderComponent implements OnInit {
   base64:string = "data:image/png;base64, ";
-  id = '0000000000000001';
+  id: string = '0000000000000001';
+  images: string[] = [];
 
-   headerDict = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Access-Control-Allow-Headers': 'Content-Type',
-  }
+  constructor(private http: HttpClient) {}
   
-  requestOptions = {                                                                                                                                                                                 
-    headers: new HttpHeaders(this.headerDict), 
-  };
-  
-    constructor(private http: HttpClient) {}
-
   async ngOnInit(): Promise<void> {
-     interval:false;
-     const res =  await this.http.get('https://swordcraft-image-generator.herokuapp.com/create-image/'+ this.id,this.requestOptions).toPromise()
-     console.log(res)
-     // images.push(this.base64 + res.raw_image) 
+    for(let i = 0; i < 3; i++) {
+      const req = this.http
+      .get('https://swordcraft-image-generator.herokuapp.com/create-image/'+ this.id)
+      // TODO: type this into Data Transfer Object (DTO)
+      const res: any = await firstValueFrom(req);
+      this.images.push(this.base64+res.raw_image);
+    }
+    // console.log(this.images);
   }
-  images = [];
-  
 }
