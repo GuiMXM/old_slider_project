@@ -1,0 +1,54 @@
+.mainWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    
+}
+
+
+.imgwrapper{
+    display: flex;
+    
+    position: relative;
+    transition: 0.5s;
+}
+
+
+
+
+.code16{
+    padding: 10px 5px;
+    margin-top: 50px;
+    border: 2px solid #efefef;
+    width: 10rem;
+    height: 2rem;
+    cursor: text;
+    border-radius: 5px;
+    transition: .4s;
+}
+
+
+.code16:hover{
+  border: 2px solid black;
+}
+
+.Erro{
+    text-decoration: underline;
+    color: white;
+    background-color: red;
+    border: 1px solid black;
+    padding: 2px;
+}
+
+
+.Ok {
+    display: flex;
+    padding: 8px;
+    width: 40;
+    height: 30px;
+    background-color: green;
+    color: aliceblue;
+}
